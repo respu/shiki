@@ -1,0 +1,137 @@
+PROJECT_NAME            = "Shiki"
+PROJECT_BRIEF           = "Modern C++ Design for Expression Templates"
+PROJECT_LOGO            =
+PROJECT_NUMBER          = "@SHIKI_VERSION_STRING@ @shiki_release@"
+
+STRIP_FROM_PATH         = @Shiki_SOURCE_DIR@/include
+BUILTIN_STL_SUPPORT     = YES
+STRIP_FROM_INC_PATH     = @Shiki_SOURCE_DIR@/include
+ENABLED_SECTIONS        =
+
+# Concepts and links to boost documentation
+ALIASES =
+ALIASES += anchor{1}="<a name=\"\1\"></a>[[\1](#back\1)]:"
+ALIASES += refanchor{1}="<a name=\"back\1\"></a>[<sup>\1</sup>](#\1)"
+ALIASES += metafunction="<a href=\"http://www.boost.org/doc/libs/release/libs/mpl/doc/refmanual/metafunction.html\">Metafunction</a>"
+ALIASES += true_="@c std::integral_constant<bool,true>"
+ALIASES += false_="@c std::integral_constant<bool,false>"
+ALIASES += mplint="<a href=\"http://www.boost.org/doc/libs/release/libs/mpl/doc/refmanual/integral-constant.html\">Integral Constant</a>"
+ALIASES += mpllambda="<a href=\"http://www.boost.org/doc/libs/releae/libs/mpl/doc/refmanual/lambda-expression.html\">Lambda Expression</a>"
+
+# Resources
+OUTPUT_DIRECTORY        =
+INPUT                    = @Shiki_SOURCE_DIR@/include/
+INPUT                   += @Shiki_SOURCE_DIR@/doc
+FILE_PATTERNS           = *.md *.hpp
+RECURSIVE               = YES
+
+#EXCLUDE                = @Shiki_SOURCE_DIR@/???
+
+EXAMPLE_PATH            = @Shiki_SOURCE_DIR@/example
+#EXAMPLE_PATH           += @Shiki_SOURCE_DIR@/test/unit
+EXAMPLE_PATH           += @Shiki_SOURCE_DIR@/doc/
+EXAMPLE_RECURSIVE       = YES
+
+IMAGE_PATH              =
+MARKDOWN_SUPPORT        = YES
+WARN_IF_UNDOCUMENTED    = YES
+
+SHOW_GROUPED_MEMB_INC   = YES
+BRIEF_MEMBER_DESC       = YES
+REPEAT_BRIEF            = YES
+ALWAYS_DETAILED_SEC     = NO
+INLINE_INHERITED_MEMB   = NO
+JAVADOC_AUTOBRIEF       = YES
+QT_AUTOBRIEF            = YES
+MULTILINE_CPP_IS_BRIEF  = YES
+INHERIT_DOCS            = NO
+SEPARATE_MEMBER_PAGES   = YES
+DISTRIBUTE_GROUP_DOC    = NO
+SUBGROUPING             = NO
+INLINE_GROUPED_CLASSES  = NO
+INLINE_SIMPLE_STRUCTS   = NO
+
+# Generated formats
+GENERATE_HTML           = YES
+GENERATE_LATEX          = NO
+GENERATE_TODOLIST       = YES
+GENERATE_TESTLIST       = YES
+GENERATE_BUGLIST        = YES
+GENERATE_DEPRECATEDLIST = YES
+SHOW_USED_FILES         = YES
+SHOW_FILES              = YES
+SHOW_NAMESPACES         = YES
+LAYOUT_FILE             = @Shiki_SOURCE_DIR@/doc/layout.xml
+
+CLASS_DIAGRAMS          = NO
+HAVE_DOT                = NO
+
+HIDE_UNDOC_RELATIONS    = NO
+HIDE_UNDOC_MEMBERS      = YES
+HIDE_UNDOC_CLASSES      = YES
+HIDE_FRIEND_COMPOUNDS   = NO
+HIDE_IN_BODY_DOCS       = NO
+INTERNAL_DOCS           = YES
+HIDE_SCOPE_NAMES        = NO
+SHOW_INCLUDE_FILES      = NO
+FORCE_LOCAL_INCLUDES    = NO
+INLINE_INFO             = YES
+SORT_MEMBER_DOCS        = NO
+SORT_BRIEF_DOCS         = NO
+SORT_MEMBERS_CTORS_1ST  = NO
+SORT_GROUP_NAMES        = NO
+SORT_BY_SCOPE_NAME      = YES
+
+
+ALPHABETICAL_INDEX      = NO
+COLS_IN_ALPHA_INDEX     = 1
+
+# Preprocessing
+ENABLE_PREPROCESSING    = YES
+MACRO_EXPANSION         = YES
+EXPAND_ONLY_PREDEF      = YES
+SEARCH_INCLUDES         = YES
+INCLUDE_PATH            = @Shiki_SOURCE_DIR@/include
+INCLUDE_FILE_PATTERNS   =
+PREDEFINED              = DOXYGEN_ONLY
+SKIP_FUNCTION_MACROS    = NO
+
+# Source browsing
+SOURCE_BROWSER          = NO
+INLINE_SOURCES          = NO
+STRIP_CODE_COMMENTS     = YES
+REFERENCED_BY_RELATION  = YES
+REFERENCES_RELATION     = YES
+REFERENCES_LINK_SOURCE  = YES
+USE_HTAGS               = NO
+VERBATIM_HEADERS        = NO
+# CLANG_ASSISTED_PARSING  = NO
+# CLANG_OPTIONS           =
+
+# HTML output
+HTML_OUTPUT             = html
+HTML_FILE_EXTENSION     = .html
+HTML_HEADER             =
+HTML_FOOTER             =
+HTML_EXTRA_STYLESHEET   =
+HTML_EXTRA_FILES        =
+HTML_COLORSTYLE_HUE     = 359  # 0 - 359
+HTML_COLORSTYLE_SAT     = 70 # 0 - 255
+HTML_COLORSTYLE_GAMMA   = 90
+HTML_TIMESTAMP          = NO
+HTML_DYNAMIC_SECTIONS   = YES
+HTML_INDEX_NUM_ENTRIES  = 0 # Fully expand trees in the Indexes by default
+DISABLE_INDEX           = YES
+GENERATE_TREEVIEW       = YES
+TREEVIEW_WIDTH          = 230
+EXT_LINKS_IN_WINDOW     = NO
+FORMULA_FONTSIZE        = 10
+FORMULA_TRANSPARENT     = YES
+SEARCHENGINE            = YES
+
+# Mathjax (HTML only)
+USE_MATHJAX             = YES
+MATHJAX_FORMAT          = HTML-CSS
+MATHJAX_RELPATH         = http://cdn.mathjax.org/mathjax/latest
+MATHJAX_EXTENSIONS      =
+MATHJAX_CODEFILE        =
