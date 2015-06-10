@@ -80,9 +80,9 @@ endif()
 
 parse_revision("${SHIKI_VERSION_STRING}" SHIKI_VERSION)
 
-set(nstest_release "(release)")
+set(shiki_release "(release)")
 if(SHIKI_VERSION_IS_PRERELEASE)
-  set(nstest_release "(pre-release)")
+  set(shiki_release "(pre-release)")
 endif()
 
-message(STATUS "[shiki] Configuring Shiki version ${SHIKI_VERSION_STRING} ${nstest_release}")
+message(STATUS "[shiki] Configuring Shiki version ${SHIKI_VERSION_STRING} ${shiki_release}")
