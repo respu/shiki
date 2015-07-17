@@ -38,7 +38,7 @@ include(parse_revision)
 include_directories ( ${PROJECT_SOURCE_DIR}/include
                       ${Boost_INCLUDE_DIRS}
                       ${PROJECT_SOURCE_DIR}/_deps/nstest/include
-                      ${PROJECT_SOURCE_DIR}/_deps/brigand/brigand
+                      ${PROJECT_SOURCE_DIR}/_deps/brigand
                     )
 
 ##===================================================================================================
@@ -50,8 +50,8 @@ add_subdirectory(doc)
 ## Setup Unit & Coverage Test
 ##===================================================================================================
 enable_testing()
-#include(coverage)
-#setup_target_for_coverage(shiki)
+include(coverage)
+setup_target_for_coverage(shiki)
 
 add_custom_target(unit)
-#add_subdirectory(test)
+add_subdirectory(test)
