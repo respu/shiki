@@ -1,4 +1,5 @@
 #include <iostream>
+#include <tuple>
 
 namespace ops
 {
@@ -7,8 +8,6 @@ namespace ops
     struct support {};
   }
 }
-
-template<typename... Rules> struct grammar : Rules... {};
 
 template<typename Xpr> struct expr : ops::arithmetic::support
 {
@@ -20,7 +19,7 @@ template<typename Xpr> struct expr : ops::arithmetic::support
   {
     return expr_(v);
   }
-
+  
   protected:
   Xpr expr_;
 };
@@ -39,12 +38,20 @@ template<typename T> struct expr<terminal_<T>> : ops::arithmetic::support
   template<typename Visitor>
   inline constexpr auto accept(Visitor v) const
   {
-    return v(terminal_<T>{},expr_);
+    return v(terminal_<T>{},*this);
   }
-
+  
   protected:
   T expr_;
 };
+
+template<typename Expr> struct is_terminal_ : std::false_type {};
+template<typename V>    struct is_terminal_<terminal_<V>> : std::true_type {};
+
+template<typename Expr> constexpr bool is_terminal(Expr const&)
+{
+  return is_terminal_<Expr>::value;
+}
 
 struct eval
 {
@@ -54,12 +61,20 @@ struct eval
     return op(args.accept(*this)...);
   }
 
-  template<typename V>
-  inline constexpr auto operator()(terminal_<V> const&, V const& v) const
+  template<typename V, typename Value>
+  inline constexpr auto operator()(terminal_<V> const&, Value&& v) const
   {
-    return v;
+    return std::forward<Value>(v).value();
   }
 };
+
+template<typename Expr> constexpr auto arity(Expr const& xpr)
+{
+  return xpr.accept ( [](auto tag, auto... args) { return is_terminal(tag) ? std::integral_constant<std::size_t,0u>{}
+                                                                           : std::integral_constant<std::size_t,sizeof...(args)>{}; 
+                                                } 
+                    );   
+}
 
 namespace ops
 {
@@ -89,9 +104,9 @@ namespace ops
       auto tree = [=](auto visitor) { return visitor(plus_{},l,r); };
       return expr<decltype(tree)>(tree);
     }
-
+    
     template<typename L, typename R>
-    inline auto operator*( expr<L> const& l, expr<R> const & r )
+    inline auto operator*(expr<L> const& l, expr<R> const & r  )
     {
       auto tree = [=](auto visitor) { return visitor(times_{},l,r); };
       return expr<decltype(tree)>(tree);
@@ -114,22 +129,12 @@ struct foo : terminal<int>
   }
 };
 
-/***************************************************************************************************
-Generated assembly :
-  subq  $8, %rsp
-  movl  $121, %esi
-  movl  std::cout, %edi
-  call  operator<<(int)
-  movl  "\n", %esi
-  movq  %rax, %rdi
-  call  std::operator<<(char const*)
-  xorl  %eax, %eax
-  addq  $8, %rsp
-***************************************************************************************************/
 int main()
 {
   foo a{4}, b{7}, x;
 
   x = (a + b)*(b + a);
   std::cout << x.value() << "\n";
+  std::cout << arity(a) << "\n";
+  std::cout << arity(a + b) << "\n";
 }
