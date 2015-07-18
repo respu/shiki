@@ -70,10 +70,7 @@ struct eval
 
 template<typename Expr> constexpr auto arity(Expr const& xpr)
 {
-  return xpr.accept ( [](auto tag, auto... args) { return is_terminal(tag) ? std::integral_constant<std::size_t,0u>{}
-                                                                           : std::integral_constant<std::size_t,sizeof...(args)>{}; 
-                                                } 
-                    );   
+  return xpr.accept ( [](auto tag, auto... args) { return std::integral_constant<std::size_t,is_terminal(tag) ? 0u : sizeof...(args)>{}; } ); 
 }
 
 namespace ops
