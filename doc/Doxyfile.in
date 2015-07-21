@@ -1,4 +1,4 @@
-PROJECT_NAME            = "Shiki"
+PROJECT_NAME            = "Shiki (式)"
 PROJECT_BRIEF           = "Modern C++ Design for Expression Templates"
 PROJECT_LOGO            =
 PROJECT_NUMBER          = "@SHIKI_VERSION_STRING@ @shiki_release@"
