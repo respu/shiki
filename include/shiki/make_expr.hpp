@@ -13,17 +13,55 @@
 //==================================================================================================
 #pragma once
 
+#include <shiki/expr.hpp>
+#include <type_traits>
+#include <functional>
+#include <utility>
+
 namespace shiki
 {
+  namespace detail
+  {
+    template<typename T>
+    using is_rvalue = typename std::enable_if< std::is_rvalue_reference<T&&>::value >::type*;
+
+    template<typename T>
+    using is_not_rvalue = typename std::enable_if< !std::is_rvalue_reference<T&&>::value >::type*;
+
+    template<typename T> inline auto as_ref( T&& arg, is_not_rvalue<T> = 0 )
+    {
+      return std::reference_wrapper<typename std::remove_reference<T>::type>(arg);
+    }
+
+    template<typename T> inline decltype(auto) as_ref( T&& arg, is_rvalue<T> = 0 )
+    {
+      return std::forward<T>(arg);
+    }
+
+    /*
+      This function builds an expression containing a auto-generated lambda that :
+        - capture all the children by value
+        - call a given visitor on the tag + the unpacked children
+
+      Capture is done by value as the upper level takes care of wrapping pre-existing expression
+      in reference_wrapper.
+    */
+    template<typename Tag, typename... Child>
+    inline auto make_expr(Child const&... children)
+    {
+      auto tree = [=]( auto&& v ) { return std::forward<decltype(v)>(v)( Tag{}, children... ); };
+      return expr<decltype(tree)>(tree);
+    }
+  }
+
   /*!
     @brief Build a new expression from a pack of children
 
     @tparam Tag   Expression tag
-    @param  Args  Expression children
+    @param  Child  Expression children
   **/
-  template<typename Tag, typename... Args> inline auto make_expr(Args const&... children)
+  template<typename Tag, typename... Child> inline auto make_expr(Child&&... children)
   {
-    auto tree = [&](auto visitor) { return visitor(Tag{},children...); };
-    return expr<decltype(tree)>(tree);
+    return detail::make_expr<Tag>( detail::as_ref(std::forward<Child>(children))... );
   }
 }
