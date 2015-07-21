@@ -19,5 +19,5 @@ namespace shiki { namespace detail
     @ingroup shiki-detail
     @brief Variadic unsued parameter silencer
   **/
-  template<typename... Args> inline void ignore(Args&&...) {}
+  template<typename... Args> inline constexpr void ignore(Args&&...) {}
 } }
