@@ -13,6 +13,9 @@
 //==================================================================================================
 #pragma once
 
+#include <utility>
+#include <iostream>
+
 namespace shiki
 {
   template<typename Tree/*, typename Domain = default_domain*/> struct expr //: Domain::grammar
@@ -23,7 +26,7 @@ namespace shiki
     expr& operator=(expr && x)     = delete;
 
     // Build expression from a tree
-    inline expr(Tree const& x) : tree_{ x }                    {}
+    inline expr(Tree const& x) : tree_{ x }                     {}
     inline expr(Tree&&      x) : tree_{ std::forward<Tree>(x) } {}
 
     // Expression are CopyConstructible and MoveConstructible
@@ -32,12 +35,6 @@ namespace shiki
 
     // Trees are Visitable
     template<typename Visitor> inline decltype(auto) accept(Visitor&& visitor) const
-    {
-      return tree_(std::forward<Visitor>(visitor));
-    }
-
-    // Mutable Trees are Visitable
-    template<typename Visitor> inline decltype(auto) accept(Visitor&& visitor)
     {
       return tree_(std::forward<Visitor>(visitor));
     }
