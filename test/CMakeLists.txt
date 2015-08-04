@@ -12,6 +12,7 @@ include(make_coverage)
 add_definitions(-DBOOST_ENABLE_ASSERT_HANDLER)
 
 set ( SOURCES
+      is_terminal.cpp
       make_expr.cpp
       tag_of.cpp
       #arity.cpp
