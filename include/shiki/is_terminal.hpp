@@ -29,7 +29,7 @@ namespace shiki
   template<typename Xpr> constexpr auto is_terminal(Xpr const& xpr)
   {
     detail::ignore(xpr);
-    return std::is_base_of<tag::terminal_,Xpr>::value;
+    return std::is_base_of<tag::terminal_,Xpr>{};
   }
 
   template<typename T> constexpr auto is_terminal(expr<T> const& xpr)
@@ -42,5 +42,5 @@ namespace shiki
 
     @tparam  xpr  Expression to check
   **/
-  template<typename Expr> using is_terminal_ =  decltype( is_terminal( std::declval<Expr>() ) );
+  template<typename Expr> using is_terminal_ = decltype( is_terminal( std::declval<Expr>() ) );
 }
