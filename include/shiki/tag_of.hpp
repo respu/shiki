@@ -14,6 +14,7 @@
 #pragma once
 
 #include <shiki/detail/ignore.hpp>
+#include <utility>
 
 namespace shiki
 {
