@@ -13,6 +13,7 @@ add_definitions(-DBOOST_ENABLE_ASSERT_HANDLER)
 
 set ( SOURCES
       arity.cpp
+      is_expr.cpp
       is_terminal.cpp
       make_expr.cpp
       tag_of.cpp

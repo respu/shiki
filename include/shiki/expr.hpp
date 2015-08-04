@@ -20,6 +20,9 @@ namespace shiki
 {
   template<typename Tree/*, typename Domain = default_domain*/> struct expr //: Domain::grammar
   {
+    // Expression type-tag
+    using is_expr = void;
+
     // Expression are not DefaultConstructible nor Assignable
     expr() = delete;
     expr& operator=(expr const& x) = delete;
