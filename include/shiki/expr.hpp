@@ -34,7 +34,7 @@ namespace shiki
     inline expr(expr && x)     = default;
 
     // Trees are Visitable
-    template<typename Visitor> inline decltype(auto) accept(Visitor&& visitor) const
+    template<typename Visitor> inline constexpr decltype(auto) accept(Visitor&& visitor) const
     {
       return tree_(std::forward<Visitor>(visitor));
     }
