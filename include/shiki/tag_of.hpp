@@ -13,22 +13,30 @@
 //==================================================================================================
 #pragma once
 
+#include <shiki/detail/ignore.hpp>
+
 namespace shiki
 {
   /*!
+    @ingroup group-api
     @brief Return the tag of a given expression
 
-    @param  xpr  Expression to retrieve tag from
+    For any given Expression, returns an instance of the expression tag type.
+
+    @param  xpr  Expression to process
   **/
   template<typename Expr> inline constexpr auto tag_of(Expr const& xpr)
   {
-    return xpr.accept( [](auto tag, auto... args) { ignore(args...); return tag; } );
+    return xpr.accept( [](auto tag, auto... args) { detail::ignore(args...); return tag; } );
   }
 
   /*!
+    @ingroup group-meta
     @brief Return the type of the tag of a given expression
 
-    @taparam Expr Expression to retrieve the tag from
+    For any given Expression, returns the type of the expression tag.
+
+    @tparam Expr Expression to retrieve the tag from
   **/
-  template<typename Expr> using tag_of_ = decltype(tag_of(std::declval<Epr>()));
+  template<typename Expr> using tag_of_ = decltype(tag_of(std::declval<Expr>()));
 }

@@ -13,6 +13,8 @@ add_definitions(-DBOOST_ENABLE_ASSERT_HANDLER)
 
 set ( SOURCES
       make_expr.cpp
+      tag_of.cpp
+      #arity.cpp
     )
 
 make_unit( "shiki" ${SOURCES})
