@@ -7,9 +7,7 @@
 */
 //==================================================================================================
 #include <shiki/make_expr.hpp>
-
-#include <nstest/unit.hpp>
-#include <nstest/unit/tests/basic.hpp>
+#include <nstest.hpp>
 
 // Expression tag
 struct foo {};

@@ -37,8 +37,7 @@ include(parse_revision)
 ##===================================================================================================
 include_directories ( ${PROJECT_SOURCE_DIR}/include
                       ${Boost_INCLUDE_DIRS}
-                      ${PROJECT_SOURCE_DIR}/_deps/nstest/include
-                      ${PROJECT_SOURCE_DIR}/_deps/brigand
+                      ${PROJECT_SOURCE_DIR}/test
                     )
 
 ##===================================================================================================

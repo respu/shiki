@@ -1,6 +1,0 @@
-[submodule "_deps/brigand"]
-	path = _deps/brigand
-	url = git@github.com:edouarda/brigand.git
-[submodule "_deps/nstest"]
-	path = _deps/nstest
-	url = git@github.com:NumScale/nstest
