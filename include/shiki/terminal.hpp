@@ -48,8 +48,8 @@ namespace shiki
     BOOST_FORCEINLINE constexpr expr(expr && x)     = default;
 
     // Trees are Visitable
-    template<typename Visitor> BOOST_FORCEINLINE
-    constexpr decltype(auto) accept(Visitor&& visitor) const
+    template<typename Visitor>
+    BOOST_FORCEINLINE constexpr decltype(auto) accept(Visitor&& visitor) const
     {
       return std::forward<Visitor>(visitor)(Terminal{},value_);
     }
@@ -60,4 +60,6 @@ namespace shiki
     protected:
     Value value_;
   };
+
+  template<typename Value> using terminal = expr<shiki::tag::terminal_(Value)>;
 }
