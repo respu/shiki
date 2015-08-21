@@ -6,7 +6,7 @@
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 */
 //==================================================================================================
-#include <shiki/make_expr.hpp>
+#include <shiki/as_expr.hpp>
 #include <nstest.hpp>
 
 // Expression tag
@@ -22,14 +22,14 @@ struct bar
 
 int bar::nb_copy = 0;
 
-NSTEST_CASE( "Check make_expr non-copy policy")
+NSTEST_CASE( "Check as_expr non-copy policy")
 {
   bar f,g,h;
 
   NSTEST_EXPECT( bar::nb_copy == 0);
 
-  shiki::make_expr<foo> ( shiki::make_expr<foo> ( shiki::make_expr<foo>(g,f)
-                                                , shiki::make_expr<foo>(g,h)
+  shiki::as_expr<foo> ( shiki::as_expr<foo> ( shiki::as_expr<foo>(g,f)
+                                                , shiki::as_expr<foo>(g,h)
                                                 )
                         );
 

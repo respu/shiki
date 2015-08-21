@@ -2,7 +2,7 @@
 /*!
   @file
 
-  Defines the make_expr function
+  Defines the as_expr function
 
   @copyright 2015 Joel Falcou
 
@@ -47,7 +47,7 @@ namespace shiki
       in reference_wrapper.
     */
     template<typename Tag, typename... Child>
-    inline auto make_expr(Child const&... children)
+    inline auto as_expr(Child const&... children)
     {
       auto tree = [=]( auto&& v ) { return std::forward<decltype(v)>(v)( Tag{}, children... ); };
       return expr<decltype(tree)>(tree);
@@ -60,8 +60,8 @@ namespace shiki
     @tparam Tag   Expression tag
     @param  Child  Expression children
   **/
-  template<typename Tag, typename... Child> inline auto make_expr(Child&&... children)
+  template<typename Tag, typename... Child> inline auto as_expr(Child&&... children)
   {
-    return detail::make_expr<Tag>( detail::as_ref(std::forward<Child>(children))... );
+    return detail::as_expr<Tag>( detail::as_ref(std::forward<Child>(children))... );
   }
 }

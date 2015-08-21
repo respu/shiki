@@ -7,7 +7,7 @@
 */
 //==================================================================================================
 #include <shiki/is_terminal.hpp>
-#include <shiki/make_expr.hpp>
+#include <shiki/as_expr.hpp>
 #include <shiki/as_terminal.hpp>
 #include <shiki/value.hpp>
 
@@ -24,7 +24,7 @@ NSTEST_CASE( "Check that random values are not terminal")
 
 NSTEST_CASE( "Check that random expression is not terminal")
 {
-  NSTEST_EXPECT( shiki::is_terminal(shiki::make_expr<foo>(1.)) == false );
+  NSTEST_EXPECT( shiki::is_terminal(shiki::as_expr<foo>(1.)) == false );
 }
 
 struct value_ : shiki::tag::terminal_ {};
