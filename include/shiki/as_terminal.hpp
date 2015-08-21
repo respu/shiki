@@ -13,7 +13,7 @@
 //==================================================================================================
 #pragma once
 
-#include <shiki/support/terminal.hpp>
+#include <shiki/terminal.hpp>
 #include <shiki/expr.hpp>
 #include <boost/config.hpp>
 #include <utility>

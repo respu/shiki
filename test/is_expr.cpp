@@ -7,7 +7,7 @@
 */
 //==================================================================================================
 #include <shiki/is_expr.hpp>
-#include <shiki/support/terminal.hpp>
+#include <shiki/terminal.hpp>
 #include <shiki/as_expr.hpp>
 #include <shiki/as_terminal.hpp>
 
