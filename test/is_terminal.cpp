@@ -8,6 +8,8 @@
 //==================================================================================================
 #include <shiki/is_terminal.hpp>
 #include <shiki/make_expr.hpp>
+#include <shiki/as_terminal.hpp>
+#include <shiki/value.hpp>
 
 #include <nstest.hpp>
 
@@ -29,6 +31,6 @@ struct value_ : shiki::tag::terminal_ {};
 
 NSTEST_CASE( "Check that terminal expressions are terminal")
 {
-  NSTEST_EXPECT( shiki::is_terminal(shiki::make_expr<shiki::tag::terminal_>(1.)) == true );
-  NSTEST_EXPECT( shiki::is_terminal(shiki::make_expr<value_>("lol")) == true );
+  NSTEST_EXPECT( shiki::is_terminal(shiki::as_terminal(1.)) == true );
+  NSTEST_EXPECT( shiki::is_terminal(shiki::as_terminal("lol")) == true );
 }

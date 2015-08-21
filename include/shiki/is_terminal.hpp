@@ -21,15 +21,25 @@
 
 namespace shiki
 {
+  namespace detail
+  {
+    template<typename Expr, typename Enable = void>
+    struct is_terminal_ : std::false_type
+    {};
+
+    template<typename T>
+    struct is_terminal_<T, typename T::is_terminal> : std::true_type
+    {};
+  }
+
   /*!
     @brief Checks if an expression or a tag is a terminal
 
     @param  xpr  Expression to check
   **/
-  template<typename Xpr> constexpr auto is_terminal(Xpr const& xpr)
+  template<typename Xpr> constexpr auto is_terminal(Xpr const&)
   {
-    detail::ignore(xpr);
-    return std::is_base_of<tag::terminal_,Xpr>{};
+    return typename detail::is_terminal_<Xpr>::type{};
   }
 
   template<typename T> constexpr auto is_terminal(expr<T> const& xpr)

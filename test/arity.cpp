@@ -8,6 +8,7 @@
 //==================================================================================================
 #include <shiki/arity.hpp>
 #include <shiki/make_expr.hpp>
+#include <shiki/as_terminal.hpp>
 
 #include <nstest.hpp>
 
@@ -17,13 +18,13 @@ struct foo {};
 
 NSTEST_CASE( "Check that terminal expressions have arity of 0")
 {
-  NSTEST_EQUAL( shiki::arity(shiki::make_expr<shiki::tag::terminal_>(1.f)), 0u );
-  NSTEST_EQUAL( shiki::arity(shiki::make_expr<value_>(69u)), 0u );
+  NSTEST_EQUAL( shiki::arity(shiki::as_terminal(1.f)), 0u );
+  NSTEST_EQUAL( shiki::arity(shiki::as_terminal<value_>(69u)), 0u );
 
-  NSTEST_TYPE_IS( shiki::arity_<decltype(shiki::make_expr<shiki::tag::terminal_>(1.f))>
+  NSTEST_TYPE_IS( shiki::arity_<decltype(shiki::as_terminal(1.f))>
                 , (std::integral_constant<std::size_t,0u>)
                 );
-  NSTEST_TYPE_IS( shiki::arity_<decltype(shiki::make_expr<value_>(69u))>
+  NSTEST_TYPE_IS( shiki::arity_<decltype(shiki::as_terminal<value_>(69u))>
                 , (std::integral_constant<std::size_t,0u>)
                 );
 }

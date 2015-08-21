@@ -18,7 +18,9 @@
 
 namespace shiki
 {
-  template<typename Tree/*, typename Domain = default_domain*/> struct expr //: Domain::grammar
+  template< typename Tree/*, typename Domain = default_domain*/
+          , typename IsTerminal = void
+          > struct expr //: Domain::grammar
   {
     // Expression type-tag
     using is_expr = void;

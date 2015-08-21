@@ -9,6 +9,7 @@
 #include <shiki/is_expr.hpp>
 #include <shiki/support/terminal.hpp>
 #include <shiki/make_expr.hpp>
+#include <shiki/as_terminal.hpp>
 
 #include <nstest.hpp>
 
@@ -29,11 +30,11 @@ NSTEST_CASE( "Check that random expressions are expressions")
 {
   NSTEST_EXPECT( shiki::is_expr(shiki::make_expr<foo>(1.)) == true );
   NSTEST_EXPECT( shiki::is_expr(shiki::make_expr<foo>(1,0,'L')) == true );
-  NSTEST_EXPECT( shiki::is_expr(shiki::make_expr<shiki::tag::terminal_>(1.)) == true );
-  NSTEST_EXPECT( shiki::is_expr(shiki::make_expr<value_>("lol")) == true );
+  NSTEST_EXPECT( shiki::is_expr(shiki::as_terminal(1.)) == true );
+  NSTEST_EXPECT( shiki::is_expr(shiki::as_terminal<value_>("lol")) == true );
 
   NSTEST_TYPE_IS( shiki::is_expr_<decltype(shiki::make_expr<foo>(1.))>, std::true_type );
   NSTEST_TYPE_IS( shiki::is_expr_<decltype(shiki::make_expr<foo>(1,0,'L'))>, std::true_type );
-  NSTEST_TYPE_IS( shiki::is_expr_<decltype(shiki::make_expr<shiki::tag::terminal_>(1.))>, std::true_type );
-  NSTEST_TYPE_IS( shiki::is_expr_<decltype(shiki::make_expr<value_>("lol"))>, std::true_type );
+  NSTEST_TYPE_IS( shiki::is_expr_<decltype(shiki::as_terminal(1.))>, std::true_type );
+  NSTEST_TYPE_IS( shiki::is_expr_<decltype(shiki::as_terminal<value_>("lol"))>, std::true_type );
 }
