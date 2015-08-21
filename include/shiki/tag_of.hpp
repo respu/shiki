@@ -26,7 +26,8 @@ namespace shiki
 
     @param  xpr  Expression to process
   **/
-  template<typename Expr> inline constexpr auto tag_of(Expr const& xpr)
+  template<typename Expr>
+  BOOST_FORCEINLINE constexpr auto tag_of(Expr const& xpr)
   {
     return xpr.accept( [](auto tag, auto... args) { boost::ignore_unused(args...); return tag; } );
   }

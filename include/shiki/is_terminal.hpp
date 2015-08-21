@@ -16,6 +16,7 @@
 #include <shiki/support/terminal.hpp>
 #include <shiki/tag_of.hpp>
 #include <shiki/expr.hpp>
+#include <boost/config.hpp>
 #include <type_traits>
 
 namespace shiki
@@ -36,12 +37,12 @@ namespace shiki
 
     @param  xpr  Expression to check
   **/
-  template<typename Xpr> constexpr auto is_terminal(Xpr const&)
+  template<typename Xpr> BOOST_FORCEINLINE constexpr auto is_terminal(Xpr const&)
   {
     return typename detail::is_terminal_<Xpr>::type{};
   }
 
-  template<typename T,typename S> constexpr auto is_terminal(expr<T,S> const& xpr)
+  template<typename T,typename S> BOOST_FORCEINLINE constexpr auto is_terminal(expr<T,S> const& xpr)
   {
     return is_terminal(tag_of(xpr));
   }

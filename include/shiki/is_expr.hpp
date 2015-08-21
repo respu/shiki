@@ -14,6 +14,7 @@
 #pragma once
 
 #include <type_traits>
+#include <boost/config.hpp>
 
 namespace shiki
 {
@@ -41,7 +42,7 @@ namespace shiki
 
     @param  xpr  Value to check
   **/
-  template<typename Expr> constexpr auto is_expr(Expr const&)
+  template<typename Expr> BOOST_FORCEINLINE constexpr auto is_expr(Expr const&)
   {
     return is_expr_<Expr>{};
   }

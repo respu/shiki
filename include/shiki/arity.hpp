@@ -15,6 +15,7 @@
 
 #include <shiki/is_terminal.hpp>
 #include <boost/core/ignore_unused.hpp>
+#include <boost/config.hpp>
 
 namespace shiki
 {
@@ -29,7 +30,7 @@ namespace shiki
 
     @param  xpr  Expression to process
   **/
-  template<typename Expr> inline constexpr auto arity(Expr const& xpr)
+  template<typename Expr> BOOST_FORCEINLINE constexpr auto arity(Expr const& xpr)
   {
     return xpr.accept ( [](auto const& tag, auto&&... args)
                       {

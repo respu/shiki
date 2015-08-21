@@ -14,6 +14,7 @@
 #pragma once
 
 #include <shiki/expr.hpp>
+#include <boost/config.hpp>
 
 namespace shiki
 {
@@ -39,21 +40,22 @@ namespace shiki
     expr& operator=(expr && x)     = delete;
 
     // Build expression from a tree
-    inline expr(Value const& x) : value_{ x }                      {}
-    inline expr(Value&&      x) : value_{ std::forward<Value>(x) } {}
+    BOOST_FORCEINLINE constexpr expr(Value const& x) : value_{ x }                      {}
+    BOOST_FORCEINLINE constexpr expr(Value&&      x) : value_{ std::forward<Value>(x) } {}
 
     // Expression are CopyConstructible and MoveConstructible
-    inline expr(expr const& x) = default;
-    inline expr(expr && x)     = default;
+    BOOST_FORCEINLINE constexpr expr(expr const& x) = default;
+    BOOST_FORCEINLINE constexpr expr(expr && x)     = default;
 
     // Trees are Visitable
-    template<typename Visitor> inline constexpr decltype(auto) accept(Visitor&& visitor) const
+    template<typename Visitor> BOOST_FORCEINLINE
+    constexpr decltype(auto) accept(Visitor&& visitor) const
     {
       return std::forward<Visitor>(visitor)(Terminal{},value_);
     }
 
-    inline           Value&           value()         { return value_; }
-    inline constexpr Value const&     value() const   { return value_; }
+    BOOST_FORCEINLINE           Value&        value()         { return value_; }
+    BOOST_FORCEINLINE constexpr Value const&  value() const   { return value_; }
 
     protected:
     Value value_;

@@ -14,6 +14,7 @@
 #pragma once
 
 #include <shiki/expr.hpp>
+#include <boost/config.hpp>
 #include <type_traits>
 #include <functional>
 #include <utility>
@@ -28,12 +29,12 @@ namespace shiki
     template<typename T>
     using is_not_rvalue = typename std::enable_if< !std::is_rvalue_reference<T&&>::value >::type*;
 
-    template<typename T> inline auto as_ref( T&& arg, is_not_rvalue<T> = 0 )
+    template<typename T> BOOST_FORCEINLINE auto as_ref( T&& arg, is_not_rvalue<T> = 0 )
     {
       return std::reference_wrapper<typename std::remove_reference<T>::type>(arg);
     }
 
-    template<typename T> inline decltype(auto) as_ref( T&& arg, is_rvalue<T> = 0 )
+    template<typename T> BOOST_FORCEINLINE decltype(auto) as_ref( T&& arg, is_rvalue<T> = 0 )
     {
       return std::forward<T>(arg);
     }
@@ -47,7 +48,7 @@ namespace shiki
       in reference_wrapper.
     */
     template<typename Tag, typename... Child>
-    inline auto as_expr(Child const&... children)
+    BOOST_FORCEINLINE auto as_expr(Child const&... children)
     {
       auto tree = [=]( auto&& v ) { return std::forward<decltype(v)>(v)( Tag{}, children... ); };
       return expr<decltype(tree)>(tree);
@@ -60,7 +61,7 @@ namespace shiki
     @tparam Tag   Expression tag
     @param  Child  Expression children
   **/
-  template<typename Tag, typename... Child> inline auto as_expr(Child&&... children)
+  template<typename Tag, typename... Child> BOOST_FORCEINLINE auto as_expr(Child&&... children)
   {
     return detail::as_expr<Tag>( detail::as_ref(std::forward<Child>(children))... );
   }
