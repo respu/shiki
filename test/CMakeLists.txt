@@ -17,6 +17,7 @@ set ( SOURCES
       is_expr.cpp
       is_terminal.cpp
       tag_of.cpp
+      value.cpp
     )
 
 make_unit( "shiki" ${SOURCES})
