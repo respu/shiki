@@ -13,8 +13,8 @@
 //==================================================================================================
 #pragma once
 
-#include <shiki/detail/ignore.hpp>
 #include <shiki/is_terminal.hpp>
+#include <boost/core/ignore_unused.hpp>
 
 namespace shiki
 {
@@ -33,7 +33,7 @@ namespace shiki
   {
     return xpr.accept ( [](auto const& tag, auto&&... args)
                       {
-                        detail::ignore(tag, args...);
+                        boost::ignore_unused(tag, args...);
                         return std::integral_constant < std::size_t
                                                       , is_terminal_<decltype(tag)>::value
                                                         ? 0u : sizeof...(args)

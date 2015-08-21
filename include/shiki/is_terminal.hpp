@@ -13,7 +13,6 @@
 //==================================================================================================
 #pragma once
 
-#include <shiki/detail/ignore.hpp>
 #include <shiki/support/terminal.hpp>
 #include <shiki/tag_of.hpp>
 #include <shiki/expr.hpp>

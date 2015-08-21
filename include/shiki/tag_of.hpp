@@ -13,7 +13,7 @@
 //==================================================================================================
 #pragma once
 
-#include <shiki/detail/ignore.hpp>
+#include <boost/core/ignore_unused.hpp>
 #include <utility>
 
 namespace shiki
@@ -28,7 +28,7 @@ namespace shiki
   **/
   template<typename Expr> inline constexpr auto tag_of(Expr const& xpr)
   {
-    return xpr.accept( [](auto tag, auto... args) { detail::ignore(args...); return tag; } );
+    return xpr.accept( [](auto tag, auto... args) { boost::ignore_unused(args...); return tag; } );
   }
 
   /*!
