@@ -685,6 +685,15 @@ namespace nstest { namespace detail
     lhs_expr(lhs_expr const&)             = delete;
     lhs_expr& operator=(lhs_expr const&)  = delete;
 
+    operator result()
+    {
+      return result { bool(lhs)
+                    , nstest::to_string( bool(lhs) )
+                    , nstest::to_string("")
+                    , nstest::to_string("")
+                    };
+    }
+
     #define NSTEST_BINARY_DECOMPOSE(OP,SB,FN)                                                       \
     template<typename R> result operator OP( R const & rhs )                                        \
     {                                                                                               \
@@ -748,8 +757,7 @@ do                                                                              
 #define NSTEST_EXPECT( EXPR )                                                                       \
 do                                                                                                  \
 {                                                                                                   \
-  auto r = NSTEST_DECOMPOSE(EXPR);                                                                  \
-  if( r )                                                                                           \
+  if( ::nstest::detail::result r = NSTEST_DECOMPOSE(EXPR) )                                         \
     NSTEST_PASS( "Expecting: " << ::nstest::white_(NSTEST_STRING(EXPR)) );                          \
   else                                                                                              \
   {                                                                                                 \
@@ -761,14 +769,13 @@ do                                                                              
 #define NSTEST_EXPECT_NOT( EXPR )                                                                   \
 do                                                                                                  \
 {                                                                                                   \
-  auto r = NSTEST_DECOMPOSE(EXPR);                                                                  \
-  if( !r )                                                                                          \
-    NSTEST_PASS( "Not expecting: " << ::nstest::white_(NSTEST_STRING(EXPR)) );                      \
-  else                                                                                              \
+  if( ::nstest::detail::result r = NSTEST_DECOMPOSE(EXPR) )                                         \
   {                                                                                                 \
     NSTEST_FAIL( "Not expecting: " << ::nstest::white_(NSTEST_STRING(EXPR)) );                      \
     if(!$.is_compact()) NSTEST_DUMP( r );                                                           \
   }                                                                                                 \
+  else                                                                                              \
+    NSTEST_PASS( "Not expecting: " << ::nstest::white_(NSTEST_STRING(EXPR)) );                      \
 } while( ::nstest::is_false() )                                                                     \
 
 
