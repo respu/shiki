@@ -14,6 +14,7 @@
 #pragma once
 
 #include <boost/config.hpp>
+#include <type_traits>
 
 namespace shiki
 {

@@ -19,8 +19,6 @@
 
 namespace shiki
 {
-  template<typename T> struct terminal;
-
   /*!
     @ingroup group-api
     @brief Return the number of children of a given expression
