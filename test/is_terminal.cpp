@@ -9,7 +9,6 @@
 #include <shiki/is_terminal.hpp>
 #include <shiki/as_expr.hpp>
 #include <shiki/as_terminal.hpp>
-#include <shiki/value.hpp>
 
 #include <nstest.hpp>
 
