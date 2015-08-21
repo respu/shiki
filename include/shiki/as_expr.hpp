@@ -24,17 +24,17 @@ namespace shiki
   namespace detail
   {
     template<typename T>
-    using is_rvalue = typename std::enable_if< std::is_rvalue_reference<T&&>::value >::type*;
+    using if_rvalue = typename std::enable_if< std::is_rvalue_reference<T&&>::value >::type*;
 
     template<typename T>
-    using is_not_rvalue = typename std::enable_if< !std::is_rvalue_reference<T&&>::value >::type*;
+    using if_not_rvalue = typename std::enable_if< !std::is_rvalue_reference<T&&>::value >::type*;
 
-    template<typename T> BOOST_FORCEINLINE auto as_ref( T&& arg, is_not_rvalue<T> = 0 )
+    template<typename T> BOOST_FORCEINLINE auto as_ref( T&& arg, if_not_rvalue<T> = 0 )
     {
       return std::reference_wrapper<typename std::remove_reference<T>::type>(arg);
     }
 
-    template<typename T> BOOST_FORCEINLINE decltype(auto) as_ref( T&& arg, is_rvalue<T> = 0 )
+    template<typename T> BOOST_FORCEINLINE decltype(auto) as_ref( T&& arg, if_rvalue<T> = 0 )
     {
       return std::forward<T>(arg);
     }
