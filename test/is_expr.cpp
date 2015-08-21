@@ -19,8 +19,8 @@ struct value_ : shiki::tag::terminal_ {};
 
 NSTEST_CASE( "Check that random values are not expression")
 {
-  NSTEST_EXPECT( shiki::is_expr(4.f)   == false );
-  NSTEST_EXPECT( shiki::is_expr(foo{}) == false );
+  NSTEST_EXPECT_NOT( shiki::is_expr(4.f)  );
+  NSTEST_EXPECT_NOT( shiki::is_expr(foo{}));
 
   NSTEST_TYPE_IS( shiki::is_expr_<float>, std::false_type );
   NSTEST_TYPE_IS( shiki::is_expr_<foo>, std::false_type );
@@ -28,10 +28,10 @@ NSTEST_CASE( "Check that random values are not expression")
 
 NSTEST_CASE( "Check that random expressions are expressions")
 {
-  NSTEST_EXPECT( shiki::is_expr(shiki::as_expr<foo>(1.)) == true );
-  NSTEST_EXPECT( shiki::is_expr(shiki::as_expr<foo>(1,0,'L')) == true );
-  NSTEST_EXPECT( shiki::is_expr(shiki::as_terminal(1.)) == true );
-  NSTEST_EXPECT( shiki::is_expr(shiki::as_terminal<value_>("lol")) == true );
+  NSTEST_EXPECT( shiki::is_expr(shiki::as_expr<foo>(1.)) );
+  NSTEST_EXPECT( shiki::is_expr(shiki::as_expr<foo>(1,0,'L')) );
+  NSTEST_EXPECT( shiki::is_expr(shiki::as_terminal(1.)) );
+  NSTEST_EXPECT( shiki::is_expr(shiki::as_terminal<value_>("lol")) );
 
   NSTEST_TYPE_IS( shiki::is_expr_<decltype(shiki::as_expr<foo>(1.))>, std::true_type );
   NSTEST_TYPE_IS( shiki::is_expr_<decltype(shiki::as_expr<foo>(1,0,'L'))>, std::true_type );
