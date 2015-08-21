@@ -42,7 +42,7 @@ namespace shiki
     return typename detail::is_terminal_<Xpr>::type{};
   }
 
-  template<typename T> constexpr auto is_terminal(expr<T> const& xpr)
+  template<typename T,typename S> constexpr auto is_terminal(expr<T,S> const& xpr)
   {
     return is_terminal(tag_of(xpr));
   }
